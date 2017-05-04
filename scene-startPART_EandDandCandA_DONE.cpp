@@ -608,10 +608,19 @@ void reshape( int width, int height )
     //         the window.
 
     GLfloat nearDist = 0.0001;
-    projection = Frustum(-nearDist*(float)width/(float)height,
+    if(width > height){
+        projection = Frustum(-nearDist*(float)width/(float)height,
                          nearDist*(float)width/(float)height,
                          -nearDist, nearDist,
                          nearDist, 100.0);
+    }
+    else
+    {
+        projection = Frustum(-nearDist, nearDist,
+                        -nearDist * (float)height/(float)width,
+                        nearDist*(float)height/(float)width,
+                        nearDist, 100.0);
+    }
 }
 
 //----------------------------------------------------------------------------
